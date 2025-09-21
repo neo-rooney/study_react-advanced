@@ -1,5 +1,5 @@
 export const UserInfo = ({ user }) => {
-  const { name, age, country, books } = user || {};
+  const { name, age, country, books = [] } = user || {};
   return user ? (
     <>
       <h2>{name}</h2>
