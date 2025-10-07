@@ -73,3 +73,43 @@
 - **일관성**: 모든 분할 화면이 동일한 스타일과 동작 방식 유지
 
 **핵심**: "어떻게 나눌지"는 고정하고, "무엇을 넣을지"는 자유롭게
+
+## 4. 실제 예시: BasicList 컴포넌트
+
+### 4-1. 완전한 구조와 내용의 분리
+
+- **구조**: 리스트 렌더링 로직만 담당 (`map`, `key` 처리)
+- **내용**: `ItemComponent`로 받아서 실제 아이템 표시는 신경 쓰지 않음
+- **결과**: 어떤 아이템 컴포넌트든 리스트에 넣을 수 있음
+
+### 4-2. 동적 속성 전달의 유연성
+
+```jsx
+// authors 데이터 → "author" 속성으로 전달
+<BasicList
+  items={authors}
+  sourceName="author"
+  ItemComponent={LargeAuthorsList}
+/>
+
+// books 데이터 → "book" 속성으로 전달
+<BasicList
+  items={books}
+  sourceName="book"
+  ItemComponent={LargeBooksList}
+/>
+```
+
+### 4-3. 하나의 레이아웃, 다양한 표현
+
+- **동일한 리스트 구조**: `authors`와 `books` 모두 같은 리스트 레이아웃 사용
+- **다양한 아이템 표시**: `LargeAuthorsList`, `SmallAuthorsList`, `LargeBooksList` 등
+- **일관성**: 모든 리스트가 동일한 렌더링 방식과 키 처리
+
+### 4-4. 재사용성의 극대화
+
+- **데이터 타입 무관**: `Author[]`, `Book[]` 등 어떤 배열이든 처리 가능
+- **컴포넌트 교체**: `LargeAuthorsList` ↔ `SmallAuthorsList` 자유롭게 교체
+- **속성명 자유**: `sourceName`으로 동적으로 속성명 결정
+
+**핵심**: "어떻게 리스트를 만들지"는 고정하고, "무엇을 표시할지"와 "어떻게 표시할지"는 자유롭게
